@@ -30,7 +30,7 @@ private:
     condition_variable queueCv_;
     deque<PendingMessage> messageQueue_;
     unordered_map<int64_t, chrono::steady_clock::time_point> chatNextAllowed_;
-    chrono::seconds baseDelay_{3};
+    chrono::seconds baseDelay_{4};
     thread worker_;
     atomic<bool> stopWorker_{false};
 
@@ -63,6 +63,7 @@ private:
                 // Пытаемся отправить
                 try {
                     bot_.getApi().sendMessage(msg.chatId, msg.text);
+                    this_thread::sleep_for(baseDelay_);
                     logger_->debug("Message sent to chat {}: {}", msg.chatId, msg.text.substr(0, 50) + "...");
                     // Устанавливаем следующее доступное время для чата
                     chatNextAllowed_[msg.chatId] = chrono::steady_clock::now() + baseDelay_;
@@ -285,13 +286,13 @@ private:
             }
         });
 
-        // Обработка неизвестных команд
+        // // Обработка неизвестных команд
         // bot_.getEvents().onAnyMessage([this](Message::Ptr message) {
         //     if (message->text.empty()) return;
 
         //     if (message->text[0] == '/') {
         //         logger_->warn("Unknown command from user {}: {}", message->from->username, message->text);
-        //         sendMessageWithDelay(message->chat->id,
+        //         enqueueMessage(message->chat->id,
         //             "❓ Неизвестная команда. Доступные команды:\n\n"
         //             "• /dr [N] - показать дни рождения в ближайшие N дней (по умолчанию 365)\n"
         //             "• /add день.месяц.год - добавить свой день рождения\n"
