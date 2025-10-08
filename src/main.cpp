@@ -215,7 +215,17 @@ private:
             enqueueMessage(message->chat->id, response.str());
         });
 
-        // Команда /add day.month.year - добавить свой день рождения
+        bot_.getEvents().onCommand("kek", [this](Message::Ptr message) {
+            enqueueMessage(message->chat->id, "Аяз далбаёб АХАХХАХАХА");
+        });
+
+        bot_.getEvents().onCommand("rand", [this](Message::Ptr message) {
+            auto upcoming = birthday_manager_.getUpcomingBirthdays();
+            stringstream response;
+            response << "🎂 Выпал этот далбаёб " << upcoming[rand() % upcoming.size()].first.nickname;
+            enqueueMessage(message->chat->id, response.str());
+        });
+            // Команда /add day.month.year - добавить свой день рождения
         bot_.getEvents().onCommand("add", [this](Message::Ptr message) {
             logger_->info("Received /add command from user: {}", message->from->username);
 
