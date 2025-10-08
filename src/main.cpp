@@ -216,10 +216,12 @@ private:
         });
 
         bot_.getEvents().onCommand("kek", [this](Message::Ptr message) {
+            logger_->info("Received /kek command from user: {}", message->from->username);
             enqueueMessage(message->chat->id, "Аяз далбаёб АХАХХАХАХА");
         });
 
         bot_.getEvents().onCommand("rand", [this](Message::Ptr message) {
+            logger_->info("Received /rand command from user: {}", message->from->username);
             auto upcoming = birthday_manager_.getUpcomingBirthdays();
             stringstream response;
             response << "🎂 Выпал этот далбаёб " << upcoming[rand() % upcoming.size()].first.nickname;
