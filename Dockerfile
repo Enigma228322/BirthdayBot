@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
     build-essential \
     cmake \
     pkg-config \
+    git \
     libssl-dev \
     libcurl4-openssl-dev \
     libboost-system-dev \
@@ -16,6 +17,22 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 COPY . /app
+
+# Fetch third-party libraries (submodules) if not present
+RUN set -e; \
+    mkdir -p /app/lib; \
+    if [ ! -f /app/lib/tgbot-cpp/CMakeLists.txt ]; then \
+      git clone --depth=1 https://github.com/reo7sp/tgbot-cpp.git /app/lib/tgbot-cpp; \
+    fi; \
+    if [ ! -f /app/lib/spdlog/CMakeLists.txt ]; then \
+      git clone --depth=1 https://github.com/gabime/spdlog.git /app/lib/spdlog; \
+    fi; \
+    if [ ! -f /app/lib/json/CMakeLists.txt ]; then \
+      git clone --depth=1 https://github.com/nlohmann/json.git /app/lib/json; \
+    fi; \
+    if [ ! -f /app/lib/fmt/CMakeLists.txt ]; then \
+      git clone --depth=1 https://github.com/fmtlib/fmt.git /app/lib/fmt; \
+    fi
 
 RUN mkdir -p build \
  && cd build \
