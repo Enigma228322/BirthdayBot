@@ -1,0 +1,34 @@
+# Сборка
+build/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+
+# Исполняемые файлы
+birthday_bot
+*.exe
+
+# Данные и логи
+birthdays.json
+logs/
+*.log
+
+# Переменные окружения
+.env
+
+# IDE файлы
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# Временные файлы
+*.tmp
+*.temp

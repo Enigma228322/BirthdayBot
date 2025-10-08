@@ -1,0 +1,16 @@
+.git
+.gitmodules
+.github
+.vscode
+.idea
+build
+cmake-build*
+*.swp
+*.swo
+*~
+.DS_Store
+logs
+data
+birthdays.json
+env_example.txt
+

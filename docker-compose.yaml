@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  birthday-bot:
+    build: .
+    image: birthday-bot:latest
+    container_name: birthday-bot
+    environment:
+      - BOT_TOKEN=${BOT_TOKEN}
+    restart: unless-stopped
+    volumes:
+      - ./data:/data
+
