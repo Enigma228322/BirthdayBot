@@ -221,6 +221,11 @@ private:
             enqueueMessage(message->chat->id, "Аяз далбаёб АХАХХАХАХА");
         });
 
+        bot_.getEvents().onCommand("hi", [this](Message::Ptr message) {
+            logger_->info("Received /hi command from user: {}", message->from->username);
+            enqueueMessage(message->chat->id, message->from->username + " приветствует Азма!");
+        });
+
         bot_.getEvents().onCommand("lol", [this](Message::Ptr message) {
             logger_->info("Received /lol command from user: {}", message->from->username);
             enqueueMessage(message->chat->id, "IM GAY IM SO GAY GIVE ME COCK!!!");
