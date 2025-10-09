@@ -55,6 +55,7 @@ private:
                     {
                         lock_guard<mutex> lock(queueMutex_);
                         messageQueue_.push_back(msg);
+                        this_thread::sleep_for(baseDelay_);
                     }
                     this_thread::sleep_for(chrono::milliseconds(100));
                     continue;
@@ -221,7 +222,7 @@ private:
         });
 
         bot_.getEvents().onCommand("lol", [this](Message::Ptr message) {
-            logger_->info("Received /kek command from user: {}", message->from->username);
+            logger_->info("Received /lol command from user: {}", message->from->username);
             enqueueMessage(message->chat->id, "IM GAY IM SO GAY GIVE ME COCK!!!");
         });
 
