@@ -31,6 +31,7 @@ file(MAKE_DIRECTORY ${CMAKE_BINARY_DIR}/logs)
 add_executable(birthday_bot
     src/main.cpp
     src/birthday_manager.cpp
+    src/gayrate_manager.cpp
 )
 
 # Устанавливаем путь к исполняемому файлу в корневой директории

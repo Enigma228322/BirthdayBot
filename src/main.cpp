@@ -4,6 +4,7 @@
 #include <spdlog/sinks/daily_file_sink.h>
 #include <nlohmann/json.hpp>
 #include "birthday_manager.h"
+#include "gayrate_manager.h"
 #include <sstream>
 #include <regex>
 #include <iostream>
@@ -22,6 +23,7 @@ class BirthdayBot {
 private:
     Bot bot_;
     BirthdayManager birthday_manager_;
+    GayRateManager gayrate_manager_;
     shared_ptr<spdlog::logger> logger_;
 
     // Очередь отправки сообщений (не блокирует обработчики). Глобальный воркер соблюдает задержки per-chat
@@ -249,7 +251,7 @@ private:
         });
 
         bot_.getEvents().onCommand("grazd", [this](Message::Ptr message) {
-            logger_->info("Received /lol command from user: {}", message->from->username);
+            logger_->info("Received /grazd command from user: {}", message->from->username);
             stringstream response;
             int gayness = rand() % 100;
             if (gayness > 30 && message->from->username == "Zaya_vokahksi") {
@@ -271,11 +273,13 @@ private:
             } else {
                 response << message->from->username << " гражданский на " << gayness << "%! Ты походу сосёшь хуй 💼💼💼💼💼💼💼";
             }
+            auto gay = gayrate_manager_.getGayInfo(message->from->username);
+            gayrate_manager_.addGayRate(message->from->username, gayness, gay.gayness);
             enqueueMessage(message->chat->id, response.str());
         });
 
         bot_.getEvents().onCommand("gay", [this](Message::Ptr message) {
-            logger_->info("Received /lol command from user: {}", message->from->username);
+            logger_->info("Received /gay command from user: {}", message->from->username);
             stringstream response;
             int gayness = rand() % 100;
             if (message->from->username == "Decstercense" || message->from->username == "Zaya_vokahksi") {
@@ -292,7 +296,39 @@ private:
             } else {
                 response << message->from->username << " на " << gayness << "% GAY!🏳️‍🌈🏳️‍🌈🏳️‍🌈🏳️‍🌈🏳️‍🌈 Ты походу тут самый гейский пидарас, снимай штаны";
             }
+            auto gay = gayrate_manager_.getGayInfo(message->from->username);
+            gayrate_manager_.addGayRate(message->from->username, gay.grazd, gayness);
             enqueueMessage(message->chat->id, response.str());
+        });
+
+        bot_.getEvents().onCommand("gaytop", [this](Message::Ptr message) {
+            logger_->info("Received /gaytop command from user: {}", message->from->username);
+            stringstream response;
+            const auto ratings = gayrate_manager_.getTopGayRates(false);
+            if (ratings.empty()) {
+                response << "Пока здесь педиков нет, но это ненадолго\n";
+            } else {
+                response << "👤🏆🏆🏆 Главный пидарас - " << ratings[0].nickname << ", поздравляем! 🏆🏆🏆\n";
+                for (size_t i = 1; i < ratings.size(); ++i) {
+                    response << "👤 " << ratings[i].nickname << " - " << ratings[i].gayness << '\n';
+                }
+                enqueueMessage(message->chat->id, response.str());
+            }
+        });
+
+        bot_.getEvents().onCommand("grazdtop", [this](Message::Ptr message) {
+            logger_->info("Received /grazdtop command from user: {}", message->from->username);
+            stringstream response;
+            const auto ratings = gayrate_manager_.getTopGayRates(true);
+            if (ratings.empty()) {
+                response << "Пока здесь гражданских нет, ахуели?\n";
+            } else {
+                response << "👤💼 Главный гражданский - " << ratings[0].nickname << ", поздравляем! 💼\n";
+                for (size_t i = 1; i < ratings.size(); ++i) {
+                    response << "👤 " << ratings[i].nickname << " - " << ratings[i].gayness << '\n';
+                }
+                enqueueMessage(message->chat->id, response.str());
+            }
         });
 
         bot_.getEvents().onCommand("rand", [this](Message::Ptr message) {
