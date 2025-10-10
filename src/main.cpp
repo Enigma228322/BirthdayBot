@@ -145,6 +145,11 @@ private:
         bot_.getEvents().onCommand("dr", [this](Message::Ptr message) {
             logger_->info("Received /dr command from user: {}", message->from->username);
 
+            if (message->from->username == "Decstercense"
+                || message->from->username == "Zaya_vokahksi") {
+                    enqueueMessage(message->chat->id, "Я для тя слишком дахуя спамлю, поэтому для тя команда /imgay нахуй");
+                }
+
             // Небольшая задержка перед обработкой команды
             this_thread::sleep_for(chrono::milliseconds(500));
 
@@ -203,10 +208,8 @@ private:
                 if (days_until < 0) days_until = 0;
 
                 response << "👤 " << info.nickname << " - " << info.day << "." << info.month;
-                if (days_until == 0) {
+                if (current_day == birthday_tm.tm_mday && current_month == birthday_tm.tm_mon) {
                     response << " (СЕГОДНЯ!)";
-                } else if (days_until == 1) {
-                    response << " (завтра)";
                 } else {
                     response << " (через " << days_until << " дней)";
                 }
@@ -214,6 +217,11 @@ private:
             }
 
             enqueueMessage(message->chat->id, response.str());
+        });
+
+        bot_.getEvents().onCommand("imgay", [this](Message::Ptr message) {
+            logger_->info("Received /imgay command from user: {}", message->from->username);
+            enqueueMessage(message->chat->id, "Наебал, ты теперь GAY АХАХАХХАХАХА");
         });
 
         bot_.getEvents().onCommand("kek", [this](Message::Ptr message) {
