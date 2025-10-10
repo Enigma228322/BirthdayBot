@@ -325,7 +325,7 @@ private:
             } else {
                 response << "👤💼 Главный гражданский - " << ratings[0].nickname << ", поздравляем! 💼\n";
                 for (size_t i = 1; i < ratings.size(); ++i) {
-                    response << "👤 " << ratings[i].nickname << " - " << ratings[i].gayness << '\n';
+                    response << "👤 " << ratings[i].nickname << " - " << ratings[i].grazd << '\n';
                 }
                 enqueueMessage(message->chat->id, response.str());
             }
