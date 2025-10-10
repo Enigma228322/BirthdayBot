@@ -255,18 +255,21 @@ private:
             if (gayness > 30 && message->from->username == "Zaya_vokahksi") {
                 gayness = 100;
             }
+            if (gayness < 100 && message->from->username == "WalkerGabi") {
+                gayness = 0;
+            }
             if (gayness <= 10) {
-                response << message->from->username << "гражданский на " << gayness << "%, ты походу не гражданский! 🪖🪖🪖";
+                response << message->from->username << " гражданский на " << gayness << "%, ты походу не гражданский! 🪖🪖🪖";
             } else if (gayness <= 25) {
-                response << message->from->username << "гражданский на " << gayness << "%! 💼";
+                response << message->from->username << " гражданский на " << gayness << "%! 💼";
             } else if (gayness <= 50) {
-                response << message->from->username << "гражданский на " << gayness << "%! 💼💼";
+                response << message->from->username << " гражданский на " << gayness << "%! 💼💼";
             } else if (gayness <= 75) {
-                response << message->from->username << "гражданский на " << gayness << "%! 💼💼💼";
+                response << message->from->username << " гражданский на " << gayness << "%! 💼💼💼";
             } else if (gayness <= 99) {
-                response << message->from->username << "гражданский на " << gayness << "%! 💼💼💼💼";
+                response << message->from->username << " гражданский на " << gayness << "%! 💼💼💼💼";
             } else {
-                response << message->from->username << "гражданский на " << gayness << "%! Ты походу сосёшь хуй 💼💼💼💼💼💼💼";
+                response << message->from->username << " гражданский на " << gayness << "%! Ты походу сосёшь хуй 💼💼💼💼💼💼💼";
             }
             enqueueMessage(message->chat->id, response.str());
         });
