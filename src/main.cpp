@@ -208,10 +208,19 @@ private:
                 if (days_until < 0) days_until = 0;
 
                 response << "👤 " << info.nickname << " - " << info.day << "." << info.month;
-                if (current_day == birthday_tm.tm_mday && current_month == birthday_tm.tm_mon) {
+                if (current_month == info.month && current_day == info.day) {
                     response << " (СЕГОДНЯ!)";
+                } else if ((current_day + 1 == info.day)
+                    || (current_day >= 30 && info.day == 1 && (current_month + 1) % 12 == info.month)) {
+                    response << " (завтра)";
                 } else {
-                    response << " (через " << days_until << " дней)";
+                    if (days_until%10 == 1) {
+                        response << " (через " << days_until << " день)";
+                    } else if (days_until%10 >= 2 && days_until%10 <= 4) {
+                        response << " (через " << days_until << " дня)";
+                    } else {
+                        response << " (через " << days_until << " дней)";
+                    }
                 }
                 response << " - исполнится " << age << " лет\n";
             }
