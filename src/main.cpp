@@ -256,15 +256,15 @@ private:
                 gayness = 100;
             }
             if (gayness <= 25) {
-                response << message->from->username << " на " << gayness << "GAY!🏳️‍🌈";
+                response << message->from->username << " на " << gayness << " GAY!🏳️‍🌈";
             } else if (gayness <= 50) {
-                response << message->from->username << " на " << gayness << "GAY!🏳️‍🌈🏳️‍🌈";
+                response << message->from->username << " на " << gayness << " GAY!🏳️‍🌈🏳️‍🌈";
             } else if (gayness <= 75) {
-                response << message->from->username << " на " << gayness << "GAY!🏳️‍🌈🏳️‍🌈🏳️‍🌈";
+                response << message->from->username << " на " << gayness << " GAY!🏳️‍🌈🏳️‍🌈🏳️‍🌈";
             } else if (gayness <= 99) {
-                response << message->from->username << " на " << gayness << "GAY!🏳️‍🌈🏳️‍🌈🏳️‍🌈🏳️‍🌈";
+                response << message->from->username << " на " << gayness << " GAY!🏳️‍🌈🏳️‍🌈🏳️‍🌈🏳️‍🌈";
             } else {
-                response << message->from->username << " на " << gayness << "GAY!🏳️‍🌈🏳️‍🌈🏳️‍🌈🏳️‍🌈🏳️‍🌈 Ты походу тут самый гейский пидарас, снимай штаны";
+                response << message->from->username << " на " << gayness << " GAY!🏳️‍🌈🏳️‍🌈🏳️‍🌈🏳️‍🌈🏳️‍🌈 Ты походу тут самый гейский пидарас, снимай штаны";
             }
             enqueueMessage(message->chat->id, response.str());
         });
