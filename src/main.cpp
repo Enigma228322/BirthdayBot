@@ -248,6 +248,29 @@ private:
             enqueueMessage(message->chat->id, "IM GAY IM SO GAY GIVE ME COCK!!!");
         });
 
+        bot_.getEvents().onCommand("bitch", [this](Message::Ptr message) {
+            logger_->info("Received /lol command from user: {}", message->from->username);
+            stringstream response;
+            int gayness = rand() % 100;
+            if (gayness > 30 && message->from->username == "Zaya_vokahksi") {
+                gayness = 100;
+            }
+            if (gayness <= 10) {
+                response << message->from->username << "гражданский на " << gayness << "%, ты походу не гражданский! 🪖🪖🪖";
+            } else if (gayness <= 25) {
+                response << message->from->username << "гражданский на " << gayness << "%! 💼";
+            } else if (gayness <= 50) {
+                response << message->from->username << "гражданский на " << gayness << "%! 💼💼";
+            } else if (gayness <= 75) {
+                response << message->from->username << "гражданский на " << gayness << "%! 💼💼💼";
+            } else if (gayness <= 99) {
+                response << message->from->username << "гражданский на " << gayness << "%! 💼💼💼💼";
+            } else {
+                response << message->from->username << "гражданский на " << gayness << "%! Ты походу сосёшь хуй 💼💼💼💼💼💼💼";
+            }
+            enqueueMessage(message->chat->id, response.str());
+        });
+
         bot_.getEvents().onCommand("gay", [this](Message::Ptr message) {
             logger_->info("Received /lol command from user: {}", message->from->username);
             stringstream response;
@@ -256,15 +279,15 @@ private:
                 gayness = 100;
             }
             if (gayness <= 25) {
-                response << message->from->username << " на " << gayness << " GAY!🏳️‍🌈";
+                response << message->from->username << " на " << gayness << "% GAY!🏳️‍🌈";
             } else if (gayness <= 50) {
-                response << message->from->username << " на " << gayness << " GAY!🏳️‍🌈🏳️‍🌈";
+                response << message->from->username << " на " << gayness << "% GAY!🏳️‍🌈🏳️‍🌈";
             } else if (gayness <= 75) {
-                response << message->from->username << " на " << gayness << " GAY!🏳️‍🌈🏳️‍🌈🏳️‍🌈";
+                response << message->from->username << " на " << gayness << "% GAY!🏳️‍🌈🏳️‍🌈🏳️‍🌈";
             } else if (gayness <= 99) {
-                response << message->from->username << " на " << gayness << " GAY!🏳️‍🌈🏳️‍🌈🏳️‍🌈🏳️‍🌈";
+                response << message->from->username << " на " << gayness << "% GAY!🏳️‍🌈🏳️‍🌈🏳️‍🌈🏳️‍🌈";
             } else {
-                response << message->from->username << " на " << gayness << " GAY!🏳️‍🌈🏳️‍🌈🏳️‍🌈🏳️‍🌈🏳️‍🌈 Ты походу тут самый гейский пидарас, снимай штаны";
+                response << message->from->username << " на " << gayness << "% GAY!🏳️‍🌈🏳️‍🌈🏳️‍🌈🏳️‍🌈🏳️‍🌈 Ты походу тут самый гейский пидарас, снимай штаны";
             }
             enqueueMessage(message->chat->id, response.str());
         });
