@@ -248,7 +248,7 @@ private:
             enqueueMessage(message->chat->id, "IM GAY IM SO GAY GIVE ME COCK!!!");
         });
 
-        bot_.getEvents().onCommand("bitch", [this](Message::Ptr message) {
+        bot_.getEvents().onCommand("grazd", [this](Message::Ptr message) {
             logger_->info("Received /lol command from user: {}", message->from->username);
             stringstream response;
             int gayness = rand() % 100;
