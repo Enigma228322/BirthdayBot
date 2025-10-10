@@ -308,7 +308,7 @@ private:
             if (ratings.empty()) {
                 response << "Пока здесь педиков нет, но это ненадолго\n";
             } else {
-                response << "👤🏆🏆🏆 Главный пидарас - " << ratings[0].nickname << ", поздравляем! 🏆🏆🏆\n";
+                response << "👤🏆🏆🏆 Главный пидарас - " << ratings[0].nickname << " - " << ratings[0].gayness << ", поздравляем! 🏆🏆🏆\n";
                 for (size_t i = 1; i < ratings.size(); ++i) {
                     response << "👤 " << ratings[i].nickname << " - " << ratings[i].gayness << '\n';
                 }
@@ -323,7 +323,7 @@ private:
             if (ratings.empty()) {
                 response << "Пока здесь гражданских нет, ахуели?\n";
             } else {
-                response << "👤💼 Главный гражданский - " << ratings[0].nickname << ", поздравляем! 💼\n";
+                response << "👤💼 Главный гражданский - " << ratings[0].nickname << " - " << ratings[0].grazd << ", поздравляем! 💼\n";
                 for (size_t i = 1; i < ratings.size(); ++i) {
                     response << "👤 " << ratings[i].nickname << " - " << ratings[i].grazd << '\n';
                 }
